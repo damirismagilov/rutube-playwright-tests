@@ -3,8 +3,25 @@ import { BasePage } from './BasePage';
 
 export class MainPage extends BasePage {
 
+    constructor(page) {
+        super(page);
+        this.headerLocator = this.page.getByRole('banner');
+        this.categoriesTabsLocator = this.page.locator('section').filter({
+          hasText: 'ГлавнаяФильмыСериалыТелешоуСпортБлогерыНовостиМузыкаПодкастыДетямТВ онлайн16+18'
+        });
+        this.menuLocator = this.page.getByLabel('Облегченная панель навигации'); 
+    }
     async open() {
         this.page.goto('https://rutube.ru/');
         
+    }
+    async headerHasCorrectAriaSnapshot() {
+        await expect(this.headerLocator).toMatchAriaSnapshot();
+    }
+    async categoriesTabsHasCorrectAriaSnapshot() {
+        await expect(this.categoriesTabsLocator).toMatchAriaSnapshot();
+    }
+    async menuHasCorrectAriaSnapshot() {
+        await expect(this.menuLocator).toMatchAriaSnapshot();
     }
 }
