@@ -7,7 +7,7 @@ const authFile = path.join(__dirname, '../playwright/.auth/user.json');
 
 chromium.use(stealth());
 
-test('test', async () => {
+test('auth', async () => {
 
 const browser = await chromium.launch();
 const context = await browser.newContext();
@@ -15,7 +15,7 @@ const page = await context.newPage();
 
 await page.goto('https://rutube.ru/');
 await page.locator('div').filter({ hasText: /^Вход и регистрация$/ }).locator('button').click();
-await page.locator('iframe[title="Multipass"]').contentFrame().getByRole('textbox', { name: 'Введите телефон или электроную почту'}).fill(process.env.LOGIN);
+await page.locator('iframe [title="Multipass"]').contentFrame().getByRole('textbox', { name: 'Введите телефон или электроную почту'}).fill(process.env.LOGIN);
 await page.locator('iframe [title="Multipass"]').contentFrame().getByRole('button', { name: 'Продолжить' }).click();
 await page.locator('iframe [title="Multipass"]').contentFrame().locator('#login-password' ).fill(process.env.PASSWORD);
 await page.locator('iframe [title="Multipass"]').contentFrame().getByRole('button', { name: 'Boйти', exact: true }).click();
