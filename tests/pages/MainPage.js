@@ -15,10 +15,18 @@ export class MainPage extends BasePage {
         this.headerNotificationsPopLocator = this.page.locator('.wdp-notifications-popup-module_wrapper');
         this.authorizationModalLocator = this.page.locator('iframe[title="Multipass"]').contentFrame().locator('div[role="form"]');
         this.switchToRegistrationModalButtonLocator = this.page.locator('iframe[title="Multipass"]').contentFrame().locator('div[role="form"]').getByRole('button', {name: 'Зарегистрироваться'});
+        this.menuButtonLocator = this.page.getByRole('button', {name: 'Открыть меню навигации'});
+        this.openMenuAriaLocator = this.page.locator('.menu-content-nodule_menuOpen');
+        this.changeThemeButtonLocator = this.page.getByRole('button', {name: 'Переключить на светлую тему'});
     }
     async open() {
-        this.page.goto('https://rutube.ru/');
-        
+        this.page.goto('https://rutube.ru/'); 
+    }
+    async changeThemeToWhite() {
+        await this.changeThemeButtonLocator.click();
+    }
+    async openFullMenu() {
+        await this.menuButtonLocator.click();
     }
     async headerHasCorrectAriaSnapshot() {
         await expect(this.headerLocator).toMatchAriaSnapshot({name: 'headerAriaSnapshot.yml'});
@@ -48,9 +56,18 @@ export class MainPage extends BasePage {
         await expect(this.headerNotificationsPopupLocator).toMatchAriaSnapshot({name: 'notificationsPopup.yml'});
     }
     async authorizationModalHasCorrectAriaSnapshot() {
-        await expect(this.headerNotificationsPopupLocator).toMatchAriaSnapshot({name: 'authorizationModal.yml'});
+        await expect(this.authorizationModalLocator).toMatchAriaSnapshot({name: 'authorizationModal.yml'});
     }
     async registrationModalHasCorrectAriaSnapshot() {
-        await expect(this.headerNotificationsPopupLocator).toMatchAriaSnapshot({name: 'registrationModal.yml'});
+        await expect(this.authorizationModalLocator).toMatchAriaSnapshot({name: 'registrationModal.yml'});
+    }
+    async fullMenuHasCorrectAriaSnapshot() {
+        await expect(this.openMenuAriaLocator).toMatchAriaSnapshot({name: 'fullMenuSnapshot.yml'});
+    }
+    /**
+   * @param {'dark2021' | 'white2022'} attributeValue
+   */
+    async checkThemeAttributeValue(attributeValue) {
+        await expect(this.page.locator('html')).toHaveAttribute('data-pen-theme', attributeValue);
     }
 }
