@@ -15,4 +15,21 @@ async closeCookiesAlert() {
 async checkAriaSnapshot(locator, ariaName) {
     await expect(locator).toMatchAriaSnapshot({name: ariaName});
     }
+/**
+ * @param {string} screenshotName
+ */    
+async checkLayoutByScreenshot(locator, screenshotName) {
+   await expert(locator).toHaveScreenshot(screenshotName);
+}
+/**
+ * @param {string} selector
+ */
+async hideElement(selector) {
+    await this.page.evaluate((selector) => {
+            const header = document.querySelector(selector);
+            if (header) {
+              header.style.display = 'none';  
+            }
+        }, selector);
+}
 }
