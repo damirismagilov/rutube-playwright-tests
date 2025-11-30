@@ -31,6 +31,12 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    proxy: process.env.CI && process.env.PROXY_IP 
+    ? {
+          server: process.env.PROXY_IP,
+          username: process.env.PROXY_LOGIN || undefined,
+          password: process.env.PROXY_PASSWORD || undefined,
+        } : undefined,
   },
 
   /* Configure projects for major browsers */
