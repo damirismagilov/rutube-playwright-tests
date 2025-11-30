@@ -25,10 +25,10 @@ export class MainPage extends BasePage {
     //actions
 
     async open() {
-        this.page.goto('https://rutube.ru/'); 
+        await this.page.goto('https://rutube.ru/'); 
     }
     async openHeaderUserMenu() {
-        this.userLogoLocator.click();
+        await this.userLogoLocator.click();
     }
     async changeThemeToWhite() {
         await this.changeThemeButtonLocator.click();
@@ -37,16 +37,16 @@ export class MainPage extends BasePage {
         await this.menuButtonLocator.click();
     }
     async openAddPopupList() {
-        this.headerAddButtonLocator.click()
+         await this.headerAddButtonLocator.click()
     }
     async openNotificationsPopup() {
-        this.headerNotificationsButtonLocator.click()
+        await this.headerNotificationsButtonLocator.click()
     }
     async openAuthorizationModal() {
-        this.headerLoginButtonLocator.click()
+        await this.headerLoginButtonLocator.click()
     }
     async switchToRegistrationModal() {
-        this.switchToRegistrationModalButtonLocator.click()
+        await this.switchToRegistrationModalButtonLocator.click()
     }
 
     //assertions
