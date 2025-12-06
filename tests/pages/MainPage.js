@@ -5,6 +5,7 @@ export class MainPage extends BasePage {
     constructor(page) {
         super(page);
         this.headerLocator = this.page.getByRole('banner');
+        this.incomingPopup = this.page.locator('svg-icon svg-icon--IconClose svg-icon--size');
         this.categoriesTabsLocator = this.page.locator('section').filter({ hasText: 'ГлавнаяФильмыСериалыТелешоуСпортБлогерыНовостиМузыкаПодкастыДетямТВ онлайн16+18'});
         this.menuLocator = this.page.getByLabel('Облегченная панель навигации');
         this.headerAddButtonLocator = this.page.getByRole('button', {name: 'Добавить'});
@@ -25,6 +26,9 @@ export class MainPage extends BasePage {
 
     async open() {
         await this.page.goto('/'); 
+    }
+    async closeIncomingPopup() {
+        await this.incomingPopup.click();
     }
     async openHeaderUserMenu() {
         await this.userLogoLocator.click();

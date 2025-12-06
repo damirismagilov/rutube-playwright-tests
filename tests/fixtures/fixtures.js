@@ -5,7 +5,7 @@ import { CategoriesPage } from '../pages/CategoriesPage';
 
 // Extend base test by providing "todoPage" and "settingsPage".
 // This new "test" can be used in multiple test files, and each of them will get the fixtures.
-export const test = base.extend({
+exports.test = base.test.extend({
   mainPage: async ({ page }, use) => {
     // Set up the fixture.
     const mainPage = new MainPage(page);
